@@ -90,7 +90,7 @@ If the file is a relative path, it is relative to LEM-HOME.")
                  :filename (cdr (assoc :filename bookmark-data))
                  :position (cdr (assoc :position bookmark-data)))))
     entry))
-  
+
 (defun bookmark-serialize (entry)
   (remove-if (lambda (field) (and (consp field) (null (cdr field))))
              (list (bookmark-name entry)
@@ -191,15 +191,17 @@ If the file is a relative path, it is relative to LEM-HOME.")
       (sb-int:simple-file-error (c)
         (editor-error "bookmark: ~a~&" c)))))
 
-(define-command bookmark-set (name) ("sBookmark name: ")
+(define-command bookmark-set (name)
+  ((prompt-for-string "Boorkmark name: " :initial-value ""))
   "Set a new bookmark with NAME for the current buffer.
 If a bookmark with NAME already exists, it will be overwritten.
 
 If called interactively, prompt for NAME."
-  (unless (%bookmark-insert name (current-buffer)) 
+  (unless (%bookmark-insert name (current-buffer))
     (editor-error "bookmark: Buffer not visiting a file or directory~&")))
 
-(define-command bookmark-set-no-position (name) ("sBookmark name: ")
+(define-command bookmark-set-no-position (name)
+  ((prompt-for-string "Boorkmark name: " :initial-value ""))
   "Set a new bookmark with NAME for the current buffer without position.
 If a bookmark with NAME already exists, it wil be overwritten.
 
@@ -207,7 +209,8 @@ If called interactively, prompt for NAME."
   (unless (%bookmark-insert name (current-buffer) :no-position t)
     (editor-error "bookmark: Buffer not visiting a file or directory~&")))
 
-(define-command bookmark-set-no-overwrite (name) ("sBookmark name: ")
+(define-command bookmark-set-no-overwrite (name)
+  ((prompt-for-string "Boorkmark name: " :initial-value ""))
   "Set a new bookmark with NAME for the current buffer.
 If a bookmark with NAME already exists, it will be left unchanged.
 
@@ -216,7 +219,8 @@ If called interactively, prompt for NAME."
       (editor-error "bookmark: ~a: Bookmark already exists~&" name)
       (bookmark-set name)))
 
-(define-command bookmark-set-no-position-no-overwrite (name) ("sBookmark name: ")
+(define-command bookmark-set-no-position-no-overwrite (name)
+  ((prompt-for-string "Boorkmark name: " :initial-value ""))
   "Set a new bookmark with NAME for the current buffer without position.
 If a bookmark with NAME already exists, it will be left unchanged.
 
