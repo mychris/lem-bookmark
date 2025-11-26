@@ -1,3 +1,7 @@
+## NOTICE: This repository has been archived.
+
+This package has been merged into the [lem repostiory](https://github.com/lem-project/lem).
+
 # lem-bookmarks
 
 A package for the [lem editor](https://lem-project.github.io/) which adds 
